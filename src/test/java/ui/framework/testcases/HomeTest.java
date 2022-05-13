@@ -1,8 +1,10 @@
 package ui.framework.testcases;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ui.framework.config.Config;
+import ui.framework.drivermanager.DriverManager;
 
 public class HomeTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
@@ -20,4 +22,12 @@ public class HomeTest {
         Assert.assertNull( Config.getProperties("data"));
     }
 
+    @Test
+    public void testBroswer() {
+        WebDriver driver = DriverManager.getDriver();
+        driver.get("https://pragra.io");
+        Assert.assertNotNull(driver);
+        driver.quit();
+
+    }
 }
