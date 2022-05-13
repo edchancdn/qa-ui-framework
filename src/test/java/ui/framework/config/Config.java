@@ -43,7 +43,7 @@ public class Config {
         if(property==null) {
             logger.error("No value defined in properties file {} for key {} ", instance.propertyFileName ,key);
         }
-        logger.debug("Retrieved value: {} for key: {}", key, property);
+        logger.debug("Retrieved value: {} for key: {}", property, key);
 
         return property;
     }
