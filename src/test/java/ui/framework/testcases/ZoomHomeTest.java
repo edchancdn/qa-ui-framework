@@ -10,6 +10,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ui.framework.drivermanager.DriverManager;
+import ui.framework.pages.MenuPage;
+import ui.framework.pages.SignInPage;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -41,7 +43,7 @@ public class ZoomHomeTest {
         //driver.findElement(By.id("skdhdhjhd"));
     }
 
-    @Test
+    @Test(enabled = false)
     public void testInvisility(){
         //signupfree
         By signBtnId = By.id("signupfree");
@@ -55,6 +57,14 @@ public class ZoomHomeTest {
         ((JavascriptExecutor) driver).executeScript("setTimeout(function(){ $('ul[aria-label=\"meetings\"]').append('<li id=\"atin\"><button>Hello</button></li>');},15000)");
         WebElement atin = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#atin>button")));
         Assert.assertEquals(atin.getText(),"Hello");
+    }
+
+    @Test
+    public void testPageObject() {
+        MenuPage menuPage = new MenuPage(driver);
+        menuPage.clickMeetinLink();
+        menuPage.clickSignIn().typeEmail("atin@pragra.co").typePassword("P@ssw0rd90").clickSignIn();
+
     }
 
     @Test(enabled = false)
