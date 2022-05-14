@@ -4,4 +4,5 @@ reports
 screenshots
 target
 *.log
-log/
+*.gz
+logs/
