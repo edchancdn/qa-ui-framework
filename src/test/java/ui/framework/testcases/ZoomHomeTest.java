@@ -89,6 +89,6 @@ public class ZoomHomeTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        driver.quit();
+        DriverManager.quitDriver();
     }
 }
