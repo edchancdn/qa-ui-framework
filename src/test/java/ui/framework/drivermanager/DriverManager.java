@@ -49,4 +49,10 @@ public class DriverManager {
         }
         return instance.driver;
     }
+    public synchronized static void quitDriver() {
+        if (instance != null) {
+            instance.driver.quit();
+            instance = null;
+        }
+    }
 }
