@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ui.framework.data.LoginProvider;
 import ui.framework.drivermanager.DriverManager;
 import ui.framework.pages.MenuPage;
 import ui.framework.pages.SignInPage;
@@ -59,11 +60,16 @@ public class ZoomHomeTest {
         Assert.assertEquals(atin.getText(),"Hello");
     }
 
-    @Test
-    public void testPageObject() {
+    @Test(dataProvider = "loginProvider", dataProviderClass = LoginProvider.class)
+    public void testPageObject(String user, String pass) throws InterruptedException {
         MenuPage menuPage = new MenuPage(driver);
         menuPage.clickMeetinLink();
-        menuPage.clickSignIn().typeEmail("atin@pragra.co").typePassword("P@ssw0rd90").clickSignIn();
+        SignInPage signInPage = menuPage.clickSignIn();
+        signInPage.typeEmail(user).typePassword(pass);
+        Thread.sleep(10000);
+        signInPage.clearForm();
+
+
 
     }
 
