@@ -38,4 +38,5 @@ public class MenuPage {
         this.signIn.click();
         return new SignInPage(driver);
     }
+
 }

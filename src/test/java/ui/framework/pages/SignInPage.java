@@ -36,4 +36,10 @@ public class SignInPage {
     public void clickSignIn(){
         this.submitBtn.click();
     }
+
+    public SignInPage clearForm(){
+        this.email.clear();
+        this.password.clear();
+        return this;
+    }
 }
