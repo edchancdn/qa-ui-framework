@@ -1,5 +1,7 @@
 package ui.framework.testcases;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,8 +17,10 @@ import ui.framework.drivermanager.DriverManager;
 import ui.framework.listeners.ScreenshotListener;
 import ui.framework.pages.MenuPage;
 import ui.framework.pages.SignInPage;
+import ui.framework.report.HtmlReport;
 import ui.framework.util.Utils;
 
+import javax.swing.text.html.HTML;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +29,7 @@ public class ZoomHomeTest {
     //private By pribyBtnId = By.cssSelector("#onetrust-close-btn-container>button");
     WebDriver driver ;
     FluentWait<WebDriver> wait;
+    ExtentTest report;
 
     @BeforeMethod
     public void setUp() {
@@ -34,6 +39,7 @@ public class ZoomHomeTest {
         wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(20)).pollingEvery(Duration.ofSeconds(1))
                 .ignoring(NoSuchElementException.class);
 
+        report= HtmlReport.createTest("PageObjectTest");
     }
 
     @Test(enabled = false)
@@ -72,6 +78,7 @@ public class ZoomHomeTest {
         signInPage.typeEmail(user).typePassword(pass);
         Thread.sleep(5000);
         signInPage.clearForm();
+        report.log(Status.PASS, "User Login Succeeded");
     }
 
     @Test(enabled = false)
@@ -92,5 +99,6 @@ public class ZoomHomeTest {
             throw new RuntimeException(e);
         }
         DriverManager.quitDriver();
+        HtmlReport.flushReports();
     }
 }
