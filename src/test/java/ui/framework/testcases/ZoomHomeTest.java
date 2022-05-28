@@ -15,6 +15,7 @@ import ui.framework.pages.BillingPage;
 import ui.framework.pages.InformationPage;
 import ui.framework.pages.MenuPage;
 import ui.framework.pages.SignInPage;
+import ui.framework.util.Utils;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -72,8 +73,9 @@ public class ZoomHomeTest {
         menuPage.clickMeetinLink();
         SignInPage signInPage = menuPage.clickSignIn();
         signInPage.typeEmail(user).typePassword(pass);
-        Thread.sleep(10000);
+        Thread.sleep(5000);
         signInPage.clearForm();
+
 
     }
 
@@ -93,6 +95,10 @@ public class ZoomHomeTest {
         menuPage.clickSignIn().typeEmail("atin@pragra.com").typePassword("P@ssw0rd90").clickSignIn();
 
 
+        Utils.captureScreenShot(driver,"PageObjectTest", true);
+        Utils.captureScreenShot(driver,"PageObjectTest", false);
+
+
 
     }
 
@@ -108,10 +114,11 @@ public class ZoomHomeTest {
     @AfterMethod
     public void tearDown() {
         try {
-            Thread.sleep(10000);
+
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
            // throw new RuntimeException(e);
         }
-        driver.quit();
+        DriverManager.quitDriver();
     }
 }
