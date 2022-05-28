@@ -8,11 +8,11 @@ import ui.framework.util.Utils;
 public class ScreenshotListener implements ITestListener {
     @Override
     public void onTestSuccess(ITestResult result) {
-        Utils.captureScreenShot(DriverManager.getDriver(),result.getName(), true);
+        Utils.captureScreenShot(DriverManager.getDriver(), result.getName(), true);
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        Utils.captureScreenShot(DriverManager.getDriver(),result.getName(), false);
+        Utils.captureScreenShot(DriverManager.getDriver(), result.getName(), false);
     }
 }

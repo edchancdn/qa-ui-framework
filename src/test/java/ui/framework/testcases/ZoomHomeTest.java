@@ -79,7 +79,6 @@ public class ZoomHomeTest {
         Thread.sleep(5000);
         signInPage.clearForm();
         report.log(Status.PASS, "User Login Succeeded");
-
     }
 
     @Test(enabled = false)
