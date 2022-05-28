@@ -67,7 +67,6 @@ public class ZoomHomeTest {
         menuPage.clickMeetinLink();
         SignInPage signInPage = menuPage.clickSignIn();
         signInPage.typeEmail(user).typePassword(pass);
-
         Thread.sleep(5000);
         signInPage.clearForm();
         Utils.captureScreenShot(driver,"PageObjectTest", true);
@@ -88,11 +87,8 @@ public class ZoomHomeTest {
     @AfterMethod
     public void tearDown() {
         try {
-<<<<<<< HEAD
-            Thread.sleep(1000);
-=======
+
             Thread.sleep(5000);
->>>>>>> 0a0f38b (Added screenshot changes)
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
