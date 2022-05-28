@@ -8,11 +8,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ui.framework.data.LoginProvider;
 import ui.framework.drivermanager.DriverManager;
+
 import ui.framework.pages.BillingPage;
 import ui.framework.pages.InformationPage;
+
+import ui.framework.listeners.ScreenshotListener;
+
 import ui.framework.pages.MenuPage;
 import ui.framework.pages.SignInPage;
 import ui.framework.util.Utils;
@@ -20,6 +25,7 @@ import ui.framework.util.Utils;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+@Listeners(ScreenshotListener.class)
 public class ZoomHomeTest {
     //private By pribyBtnId = By.cssSelector("#onetrust-close-btn-container>button");
     WebDriver driver ;
@@ -77,6 +83,7 @@ public class ZoomHomeTest {
         signInPage.clearForm();
 
 
+
     }
 
     @Test
@@ -95,8 +102,7 @@ public class ZoomHomeTest {
         menuPage.clickSignIn().typeEmail("atin@pragra.com").typePassword("P@ssw0rd90").clickSignIn();
 
 
-        Utils.captureScreenShot(driver,"PageObjectTest", true);
-        Utils.captureScreenShot(driver,"PageObjectTest", false);
+
 
 
 
