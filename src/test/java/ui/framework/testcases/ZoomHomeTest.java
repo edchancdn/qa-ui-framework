@@ -11,6 +11,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ui.framework.data.LoginProvider;
 import ui.framework.drivermanager.DriverManager;
+import ui.framework.pages.BillingPage;
+import ui.framework.pages.InformationPage;
 import ui.framework.pages.MenuPage;
 import ui.framework.pages.SignInPage;
 
@@ -20,15 +22,18 @@ import java.util.concurrent.TimeUnit;
 public class ZoomHomeTest {
     //private By pribyBtnId = By.cssSelector("#onetrust-close-btn-container>button");
     WebDriver driver ;
-    FluentWait<WebDriver> wait;
+    WebDriverWait wait;
+    //FluentWait<WebDriver> wait;
 
     @BeforeMethod
     public void setUp() {
         driver = DriverManager.getDriver();
         driver.get("https://zoom.us");
+        driver.manage().window().maximize();
         //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(20)).pollingEvery(Duration.ofSeconds(1))
-                .ignoring(NoSuchElementException.class);
+         wait=new WebDriverWait(driver,Duration.ofSeconds(10));
+       // wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(20)).pollingEvery(Duration.ofSeconds(1))
+               // .ignoring(NoSuchElementException.class);
 
     }
 
@@ -44,7 +49,7 @@ public class ZoomHomeTest {
         //driver.findElement(By.id("skdhdhjhd"));
     }
 
-    @Test(enabled = false)
+    @Test
     public void testInvisility(){
         //signupfree
         By signBtnId = By.id("signupfree");
@@ -60,6 +65,7 @@ public class ZoomHomeTest {
         Assert.assertEquals(atin.getText(),"Hello");
     }
 
+
     @Test(dataProvider = "loginProvider", dataProviderClass = LoginProvider.class)
     public void testPageObject(String user, String pass) throws InterruptedException {
         MenuPage menuPage = new MenuPage(driver);
@@ -68,6 +74,23 @@ public class ZoomHomeTest {
         signInPage.typeEmail(user).typePassword(pass);
         Thread.sleep(10000);
         signInPage.clearForm();
+
+    }
+
+    @Test
+    public void testPageObject1() throws InterruptedException {
+        MenuPage menuPage = new MenuPage(driver);
+        menuPage.clickMeetinLink();
+        menuPage.clickOnPlans();
+        menuPage.clickContactSales().type_email("sukhi@gmail.com").typeCompany("xyz").typeFirstName("sukhvinder")
+                .typeLastName("kaur").employee_count().typePhone("7801020267")
+                .selectCountry().selectState().typeZip("23476555").typeDescription("hello");
+
+        menuPage.clickResources();
+        //menuPage.clickOnJoin();
+        menuPage.clickById().typeMeetingId("123456789").clickSubmit().testAlert();
+
+        menuPage.clickSignIn().typeEmail("atin@pragra.com").typePassword("P@ssw0rd90").clickSignIn();
 
 
 
@@ -87,7 +110,7 @@ public class ZoomHomeTest {
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+           // throw new RuntimeException(e);
         }
         driver.quit();
     }
