@@ -13,6 +13,7 @@ import ui.framework.data.LoginProvider;
 import ui.framework.drivermanager.DriverManager;
 import ui.framework.pages.MenuPage;
 import ui.framework.pages.SignInPage;
+import ui.framework.util.Utils;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -66,9 +67,11 @@ public class ZoomHomeTest {
         menuPage.clickMeetinLink();
         SignInPage signInPage = menuPage.clickSignIn();
         signInPage.typeEmail(user).typePassword(pass);
-        Thread.sleep(1000);
-        signInPage.clearForm();
 
+        Thread.sleep(5000);
+        signInPage.clearForm();
+        Utils.captureScreenShot(driver,"PageObjectTest", true);
+        Utils.captureScreenShot(driver,"PageObjectTest", false);
 
 
     }
@@ -85,7 +88,11 @@ public class ZoomHomeTest {
     @AfterMethod
     public void tearDown() {
         try {
+<<<<<<< HEAD
             Thread.sleep(1000);
+=======
+            Thread.sleep(5000);
+>>>>>>> 0a0f38b (Added screenshot changes)
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
