@@ -1,5 +1,7 @@
 package ui.framework.testcases;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -8,20 +10,26 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ui.framework.data.LoginProvider;
 import ui.framework.drivermanager.DriverManager;
+import ui.framework.listeners.ScreenshotListener;
 import ui.framework.pages.MenuPage;
 import ui.framework.pages.SignInPage;
+import ui.framework.report.HtmlReport;
 import ui.framework.util.Utils;
 
+import javax.swing.text.html.HTML;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+@Listeners(ScreenshotListener.class)
 public class ZoomHomeTest {
     //private By pribyBtnId = By.cssSelector("#onetrust-close-btn-container>button");
     WebDriver driver ;
     FluentWait<WebDriver> wait;
+    ExtentTest report;
 
     @BeforeMethod
     public void setUp() {
@@ -31,6 +39,7 @@ public class ZoomHomeTest {
         wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(20)).pollingEvery(Duration.ofSeconds(1))
                 .ignoring(NoSuchElementException.class);
 
+        report= HtmlReport.createTest("PageObjectTest");
     }
 
     @Test(enabled = false)
@@ -69,9 +78,7 @@ public class ZoomHomeTest {
         signInPage.typeEmail(user).typePassword(pass);
         Thread.sleep(5000);
         signInPage.clearForm();
-        Utils.captureScreenShot(driver,"PageObjectTest", true);
-        Utils.captureScreenShot(driver,"PageObjectTest", false);
-
+        report.log(Status.PASS, "User Login Succeeded");
 
     }
 
@@ -93,5 +100,6 @@ public class ZoomHomeTest {
             throw new RuntimeException(e);
         }
         DriverManager.quitDriver();
+        HtmlReport.flushReports();
     }
 }

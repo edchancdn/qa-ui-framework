@@ -69,5 +69,11 @@ public class Utils {
     }
 
 
+    public static String getReportFile() {
 
+      Path path =   Paths.get(Config.getProperties("report.dir"), getDateStamp("ddMMyyyy"));
+
+      createDirs(path);
+      return path.toString()+"Report"+getDateStamp("ddMMyyyyHHmmSS")+".html";
+    }
 }
