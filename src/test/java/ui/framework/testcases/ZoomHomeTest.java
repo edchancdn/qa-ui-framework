@@ -66,7 +66,7 @@ public class ZoomHomeTest {
         menuPage.clickMeetinLink();
         SignInPage signInPage = menuPage.clickSignIn();
         signInPage.typeEmail(user).typePassword(pass);
-        Thread.sleep(10000);
+        Thread.sleep(1000);
         signInPage.clearForm();
 
 
@@ -85,7 +85,7 @@ public class ZoomHomeTest {
     @AfterMethod
     public void tearDown() {
         try {
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
