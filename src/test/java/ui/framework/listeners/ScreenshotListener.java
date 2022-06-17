@@ -15,6 +15,4 @@ public class ScreenshotListener implements ITestListener {
     public void onTestFailure(ITestResult result) {
         Utils.captureScreenShot(DriverManager.getDriver(), result.getName(), false);
     }
-
-
 }
